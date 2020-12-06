@@ -1,10 +1,11 @@
-#include <Adafruit_MAX31865.h>
-const int enablePin = 11;  // (1)
+// verify compilation using the verify/compile tool
+#include <Adafruit_MAX31865.h> // be sure to have the Adafruit_MAX31865 and Adafruit_BusIO libraries installed.
+const int enablePin = 11;  // adjust all pin values need be
 const int in1Pin = 10;
 const int in2Pin = 9;
 const int tempPin = 12;
 const float RREF = 4300.0;
-Adafruit_MAX31865 max = Adafruit_MAX31865(4, 5, 6, 7);
+Adafruit_MAX31865 max = Adafruit_MAX31865(4, 5, 6, 7); // adjust pin values need be
 float currentTemp = 0;
 float idealTemp = 450;
 
