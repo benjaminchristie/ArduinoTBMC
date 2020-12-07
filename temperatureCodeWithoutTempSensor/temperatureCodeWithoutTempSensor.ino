@@ -3,9 +3,9 @@ const int enablePin = 11;  // adjust all pin values need be
 const int in1Pin = 10;
 const int in2Pin = 9;
 const int tempPin = 12;
-int currentTemp = 0;
-int idealTemp = 350;
-int iterator = 0;
+float currentTemp = 0;
+float idealTemp = 350;
+float iterator = 0;
 
 void setup() {                 // (2)
   pinMode(enablePin, OUTPUT);
@@ -15,15 +15,19 @@ void setup() {                 // (2)
 }
 
 void loop() {                         // (3)
-  if (currentTemp >= idealTemp()) {
+  if (currentTemp >= idealTemp) {
     stop();
   }
   else {
     // note that this is not proper thermodynamics, 
     // but i am doing a computation where Q ranges from 100%-0% based on 0-350degC inversely proportional
-    int rate = 255*(int ((idealTemp - currentTemp)/idealTemp));
+    float rate = 255.0*(((idealTemp - currentTemp)/idealTemp));
     forward(rate);
-    delay(50);
+    delay(20);
+    Serial.print("Rate ");
+    Serial.println(rate);
+    Serial.print("Current Temp ");
+    Serial.println(currentTemp);
     currentTemp = currentTemp + 1;
   }
 }

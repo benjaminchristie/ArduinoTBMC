@@ -58,7 +58,7 @@ void loop() {                         // (3)
   float currTemp = getTemp();
   // note that this is not proper thermodynamics, 
   // but i am doing a computation where Q ranges from 100%-0% based on 0-350degC inversely proportional
-  int rate = 255*(int ((idealTemp - currTemp)/idealTemp));
+  float rate = 255.0*(((idealTemp - currTemp)/idealTemp));
   forward(rate);
   delay(10);
 }
