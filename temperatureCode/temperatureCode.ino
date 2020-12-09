@@ -50,6 +50,7 @@ bool testFailure() {
 
 float getTemp() {
   float temp = max.temperature(1000, RREF); // 1000 because PT1000
+  Serial.print("Temperature is "); Serial.println(temp);
   return temp;
 }
 
