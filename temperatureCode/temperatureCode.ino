@@ -14,14 +14,16 @@ void setup() {                 // (2)
   max.begin(MAX31865_4WIRE);
   if (testFailure()) {
     noInterrupts();
-    while (1) {} // continue to loop and do nothing so that there is not a hardware issue with
+    while (1) {
+      Serial.print("Stuck! ");  
+    } // continue to loop and do nothing so that there is not a hardware issue with
   }
 }
 
 bool testFailure() {
   uint8_t fault = max.readFault();
+  Serial.print("Fault 0x"); Serial.println(fault, HEX);
   if (fault) {
-    Serial.print("Fault 0x"); Serial.println(fault, HEX);
     if (fault & MAX31865_FAULT_HIGHTHRESH) {
       Serial.println("RTD High Threshold");
     }
@@ -57,8 +59,7 @@ void loop() {                         // (3)
     stop();
   }
   else {
-    // note that this is not proper thermodynamics,
-    // but i am doing a computation where Q ranges from 100%-0% based on 0-350degC inversely proportional
+    // Q ranges from 100%-0% based on 0-350degC inversely proportional
     float rate = 255.0 * (((idealTemp - currTemp) / idealTemp));
     forward(rate);
     Serial.print(rate);
